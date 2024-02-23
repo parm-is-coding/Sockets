@@ -2,6 +2,7 @@
 #include <stdlib.h>// initializeAddressInfo() -> exit()
 #include <string.h> // initializeAddressInfo() -> memset
 #include <netdb.h> // initializeAddressInfo() -> struct addrinfo, getaddrinfo(),freeaddrinfo()
+#include <arpa/inet.h>// printAddress() ->inet_ntop()
 
 void initializeAddressInfo(const char* hostName,const char* portNumber,struct addrinfo* pAddrInfo){
     memset(pAddrInfo,0,sizeof *(pAddrInfo));
@@ -24,12 +25,15 @@ void initializeAddressInfo(const char* hostName,const char* portNumber,struct ad
 }
 
 int main(){
-    const char* hostName = "129.0.0.1";
+    const char* hostName = "127.0.0.1";
     const char* portNumber = "4455";
     struct addrinfo addrInfo;
 
     initializeAddressInfo(hostName,portNumber,&addrInfo);
-    printf("helloWorld");
-    
+    printf("IP addresses for %s\n",hostName);
+
+    char ipv4[INET_ADDRSTRLEN];
+    inet_ntop(addrInfo.ai_family,&addrInfo.ai_addr,ipv4,INET_ADDRSTRLEN);
+    printf("   %s",ipv4);
     return 0;
 }
