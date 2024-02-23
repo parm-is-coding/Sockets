@@ -23,6 +23,11 @@ void initializeAddressInfo(const char* hostName,const char* portNumber,struct ad
     pAddrInfo->ai_next = pServerInfo->ai_next;
     freeaddrinfo(pServerInfo);
 }
+void printIPV4(struct addrinfo* pAddrInfo){
+    char ipv4[INET_ADDRSTRLEN];
+    inet_ntop(pAddrInfo->ai_family,&pAddrInfo->ai_addr,ipv4,INET_ADDRSTRLEN);
+    printf("   %s",ipv4);
+}
 
 int main(){
     const char* hostName = "127.0.0.1";
@@ -31,9 +36,6 @@ int main(){
 
     initializeAddressInfo(hostName,portNumber,&addrInfo);
     printf("IP addresses for %s\n",hostName);
-
-    char ipv4[INET_ADDRSTRLEN];
-    inet_ntop(addrInfo.ai_family,&addrInfo.ai_addr,ipv4,INET_ADDRSTRLEN);
-    printf("   %s",ipv4);
+    printIPV4(&addrInfo);
     return 0;
 }
