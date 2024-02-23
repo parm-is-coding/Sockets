@@ -2,7 +2,7 @@
 #include <stdlib.h>// initializeAddressInfo() -> exit()
 #include <string.h> // initializeAddressInfo() -> memset
 #include <netdb.h> // initializeAddressInfo() -> struct addrinfo, getaddrinfo(),freeaddrinfo()
-#include <arpa/inet.h>// printAddress() ->inet_ntop()
+#include <arpa/inet.h>// printIPV4() ->inet_ntop()
 
 void initializeAddressInfo(const char* hostName,const char* portNumber,struct addrinfo* pAddrInfo){
     memset(pAddrInfo,0,sizeof *(pAddrInfo));
